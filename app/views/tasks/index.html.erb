@@ -1,8 +1,19 @@
-<h1>All tasks</h1>
-<%= link_to('Create a new Taks', tasks_new_path) %>
-<ul>
-  <% @tasks.each do |task| %>
-    <h3><%= link_to task.title, task_path(task) %></h3>
-    <p><%= task.details %></p>
-  <% end %>
-</ul>
+<div class="container pt-4">
+  <h1>My tasks</h1>
+  <ul class="list-unstyled py-2">
+    <% @tasks.each do |task| %>
+      <li class="pb-1">
+        <%if task.completed%>
+          <i class="fa-regular fa-square-check"></i>
+        <% else %>
+          <i class="fa-regular fa-square"></i>
+        <% end %>
+        <%= link_to task.title, task_path(task), :class => "text-decoration-none"%> •
+        <%= link_to '<i class="fa-regular fa-trash-can"></i>'.html_safe, task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+
+      </li>
+    <% end %>
+  </ul>
+  <hr/>
+  <%= link_to '<i class="fa-regular fa-plus"></i> Add a Task'.html_safe, tasks_new_path, :class => "text-decoration-none" %>
+</div>

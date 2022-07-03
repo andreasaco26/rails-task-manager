@@ -1,6 +1,17 @@
-<h2><%= @task.title %></h2>
-<p><%= @task.details %></p>
-<p><%= @task.completed %></p>
-<%= link_to('Back', tasks_path) %>
-<%= link_to('Edit', edit_task_path(@task)) %>
-<%= link_to "Delete #{@task.title}", task_path(@task), method: :delete, data: { confirm: "Are you sure?" } %>
+<div class="container pt-4">
+<div class="d-flex flex-row justify-content-between align-items-center">
+  <div class = "p-2"><h1><%= @task.title %></h1></div>
+  <div class = "p-2"><%= link_to '<i class="fa-regular fa-pen-to-square"></i> Edit task'.html_safe, edit_task_path(@task), :class => "btn btn-outline-primary" %></div>
+  </div>
+  <div class="alert alert-secondary mt-2 mb-3" role="alert">
+    <p><%= @task.details %></p>
+  </div>
+  <%if @task.completed%>
+    <p><i class="fa-regular fa-square-check"></i> Task completed</p>
+  <% else %>
+    <p><i class="fa-regular fa-square"></i> Task not completed yet</p>
+  <% end %>
+  <hr/>
+
+  <%= link_to '<i class="fa-regular fa-arrow-left"></i> Back to list'.html_safe, tasks_path, :class => "text-decoration-none" %>
+</div>
